@@ -1,0 +1,49 @@
+body{
+  background-color: #DB092C;
+}
+
+
+.App {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 350px;
+
+}
+.title {
+  display: block;
+  text-align: center;
+  color: #fff;
+}
+
+.App form > input {
+  height: 2.2rem;
+  border-radius: 10px;
+  border: 1px #7777 solid;
+  padding: 1em;
+  font-family: sans-serif;
+  width: 100%;
+}
+
+
+#pokemon {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  background-color: rgba(46, 44, 44, 0.800);
+  border: none;
+  border-radius: 10px;
+  padding: 1em;
+  box-shadow: 1px 1px 5px 1px #000;
+}
+#pokemon .data > p > strong {
+  float: left;
+  color: #3b3b3b;
+}
+#pokemon .data > p {
+  text-align: right;
+  background: #DEDEDE;
+  padding: .8rem;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
