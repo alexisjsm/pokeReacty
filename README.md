@@ -1,0 +1,2 @@
+# pokeReacty
+pokedex with react
