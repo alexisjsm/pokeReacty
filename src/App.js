@@ -12,14 +12,11 @@ function App () {
     <div className="App">
       <header className="title">
         {title}
-      </header>
-      
+      </header> 
       <Pokemon keyword={keyword}/>
-    <form>
+    <form onSubmit={(ev) => ev.preventDefault()}>
       <input type="search" placeholder="search pokemon by id or name" onChange={(ev) => {
-        ev.preventDefault()
         setKeyword(ev.target.value)}}>
-          
         </input>
     </form>
     </div> 

@@ -16,8 +16,8 @@ export default function Pokemon (keyword) {
     )()
 
   },[keyword])
-
-  
+  const {keyword: text} = keyword
+ 
   if (pokemon.sprites) {
 
     // eslint-disable-next-line no-unused-vars
@@ -27,20 +27,26 @@ export default function Pokemon (keyword) {
   
   return(
     <div id='pokemon'>
-    <div className="data">
-       <p><strong>pokedex number:</strong> {pokemon.id}</p>
-       <p><strong>name:</strong> {pokemon.name}</p>
-       <p><strong>height: </strong>{pokemon.height / 10} m</p>
-       <p><strong>weight: </strong>{pokemon.weight / 10} kg</p>
-      {pokemon.types && pokemon.types.map((el, index) => <p key={index}><strong>Type:</strong> {el.type.name}</p>)}
+      {pokemon === 'Not found' || text.length <= 0
+      
+      ? <div className="error">
+        <p>Not found</p>
+       </div>
+
+       
+      :  <div className="data">
+          <p><strong>pokedex number:</strong> {pokemon.id}</p>
+          <p><strong>name:</strong> {pokemon.name}</p>
+          <p><strong>height: </strong>{pokemon.height / 10} m</p>
+          <p><strong>weight: </strong>{pokemon.weight / 10} kg</p>
+          {pokemon.types && pokemon.types.map((el, index) => <p key={index}><strong>Type:</strong> {el.type.name}</p>)}
+        <div className="sprites">
+          {pokemon.sprites && Object.entries(pokemon.sprites).map(([key, val]) => {
+            if(val !== null) return <img key={key} src={val} alt={key}/>
+          })}
+        </div>
       </div> 
-      <div className="sprites">
-      {pokemon.sprites && Object.entries(pokemon.sprites).map(([key, val]) => {
-        if(val !== null){
-          return <img key={key} src={val} alt={key}/>
-        }
-      })}
-      </div>
+    }
     </div>
   )
 }

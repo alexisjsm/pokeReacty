@@ -5,6 +5,8 @@ export default async function PokeApi ({ keyword = 'pikachu'}) {
     return response
     
   } catch (err) {
-    return err;
+    if (err instanceof SyntaxError) {
+      return 'Not found'
+    }
   }
 }
