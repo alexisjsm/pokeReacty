@@ -15,6 +15,24 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, o
   const stats = pokemon.stats;
   const maxStat = 255; // Max possible stat value in Pokemon
   
+  // Get the English description from species data
+  const getDescription = () => {
+    if (!species || !species.flavor_text_entries) return null;
+    
+    // Find English flavor text, preferring newer games
+    const englishEntries = species.flavor_text_entries
+      .filter(entry => entry.language.name === 'en');
+    
+    if (englishEntries.length === 0) return null;
+    
+    // Get the most recent entry and clean it up
+    const text = englishEntries[englishEntries.length - 1].flavor_text;
+    // Replace newlines and form feeds with spaces
+    return text.replace(/[\n\f]/g, ' ').replace(/\s+/g, ' ').trim();
+  };
+  
+  const description = getDescription();
+  
   return (
     <div className="pokemon-card">
       {/* Header Section */}
@@ -65,6 +83,14 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, o
           </div>
         </div>
       </div>
+      
+      {/* Description Section */}
+      {description && (
+        <div className="section">
+          <h2 className="section-title">📖 Description</h2>
+          <p className="pokemon-description">{description}</p>
+        </div>
+      )}
       
       {/* Stats Section */}
       <div className="section">
