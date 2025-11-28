@@ -25,8 +25,9 @@ export default function SearchForm({ onSearch, initialValue = '' }) {
   // Filter suggestions based on query
   useEffect(() => {
     if (query.trim().length > 0 && allPokemon.length > 0) {
+      const lowerQuery = query.toLowerCase();
       const filtered = allPokemon.filter(p => 
-        p.name.toLowerCase().includes(query.toLowerCase()) ||
+        p.name.toLowerCase().includes(lowerQuery) ||
         p.id.toString() === query.trim()
       ).slice(0, 8);
       setSuggestions(filtered);
@@ -90,7 +91,7 @@ export default function SearchForm({ onSearch, initialValue = '' }) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
+            onFocus={() => query.trim().length > 0 && suggestions.length > 0 && setShowSuggestions(true)}
             onKeyDown={handleKeyDown}
             placeholder="Search Pokémon by name or ID..."
             className="search-input"
