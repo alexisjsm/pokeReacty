@@ -115,8 +115,15 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, o
           <h2 className="section-title">🔄 Evolution Chain</h2>
           <div className="evolution-chain">
             {evolutions.map((evo, index) => (
-              <div key={evo.id} style={{ display: 'flex', alignItems: 'center' }}>
-                {index > 0 && <span className="evolution-arrow">→</span>}
+              <div key={evo.id} className="evolution-step">
+                {index > 0 && (
+                  <div className="evolution-arrow-container">
+                    <span className="evolution-arrow">→</span>
+                    {evo.evolutionMethod && (
+                      <span className="evolution-method">{evo.evolutionMethod}</span>
+                    )}
+                  </div>
+                )}
                 <button 
                   className={`evolution-pokemon ${evo.id === pokemon.id ? 'current' : ''}`}
                   onClick={() => onPokemonClick && onPokemonClick(evo.name)}

@@ -330,7 +330,19 @@ body, html {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
+}
+
+.evolution-step {
+  display: flex;
+  align-items: center;
+}
+
+.evolution-arrow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.5rem;
 }
 
 .evolution-pokemon {
@@ -371,6 +383,15 @@ body, html {
 .evolution-arrow {
   font-size: 1.5rem;
   color: #999;
+}
+
+.evolution-method {
+  font-size: 0.7rem;
+  color: #666;
+  text-align: center;
+  max-width: 80px;
+  line-height: 1.2;
+  text-transform: capitalize;
 }
 
 .locations-grid {
