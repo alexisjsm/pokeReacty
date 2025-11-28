@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react';
 import SearchForm from '../components/SearchForm';
 import PokemonCard from '../components/PokemonCard';
-import { getPokemon, getPokemonSpecies, getEvolutionChain, getPokemonLocations, parseEvolutionChain } from '../lib/pokeapi';
+import { getPokemon, getPokemonSpecies, getEvolutionChain, getPokemonLocations, parseEvolutionChain, getRegionalForms, fetchRegionalFormTypes } from '../lib/pokeapi';
 
 export default function Home() {
   const [pokemon, setPokemon] = useState(null);
   const [species, setSpecies] = useState(null);
   const [evolutions, setEvolutions] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [regionalForms, setRegionalForms] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [currentSearch, setCurrentSearch] = useState('');
@@ -31,6 +32,7 @@ export default function Home() {
         setSpecies(null);
         setEvolutions([]);
         setLocations([]);
+        setRegionalForms([]);
         setLoading(false);
         return;
       }
@@ -48,6 +50,13 @@ export default function Home() {
           const parsedEvolutions = parseEvolutionChain(evolutionData.chain);
           setEvolutions(parsedEvolutions);
         }
+      }
+      
+      // Get regional forms and fetch their types
+      if (speciesData) {
+        const forms = getRegionalForms(speciesData, pokemonData.species.name);
+        const formsWithTypes = await fetchRegionalFormTypes(forms);
+        setRegionalForms(formsWithTypes);
       }
       
       // Fetch locations
@@ -97,6 +106,7 @@ export default function Home() {
           species={species}
           evolutions={evolutions}
           locations={locations}
+          regionalForms={regionalForms}
           onPokemonClick={handlePokemonClick}
         />
       )}

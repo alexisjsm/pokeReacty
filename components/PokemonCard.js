@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { getMegaEvolutions } from '../lib/pokeapi';
 
-export default function PokemonCard({ pokemon, species, evolutions, locations, onPokemonClick }) {
+export default function PokemonCard({ pokemon, species, evolutions, locations, regionalForms, onPokemonClick }) {
   const [showShiny, setShowShiny] = useState(false);
   
   if (!pokemon) return null;
@@ -196,6 +196,41 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, o
                 <div className="mega-stone-container">
                   <div className="mega-stone-icon">💎</div>
                   <span className="mega-stone-name">{mega.megaStone}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Regional Forms Section */}
+      {regionalForms && regionalForms.length > 0 && (
+        <div className="section">
+          <h2 className="section-title">🌍 Regional Forms</h2>
+          <div className="regional-forms-grid">
+            {regionalForms.map((form) => (
+              <div key={form.id} className="regional-form-card">
+                <div className="regional-form-header">
+                  <span className="regional-emoji">{form.regionEmoji}</span>
+                  <span className="regional-name">{form.displayName}</span>
+                </div>
+                <Image 
+                  src={form.sprite} 
+                  alt={form.displayName}
+                  className="regional-form-image"
+                  width={100}
+                  height={100}
+                  unoptimized
+                />
+                <div className="regional-types">
+                  {form.types && form.types.map((type) => (
+                    <span 
+                      key={type}
+                      className={`type-badge type-${type}`}
+                    >
+                      {type}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}

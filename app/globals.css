@@ -469,6 +469,62 @@ body, html {
   text-transform: capitalize;
 }
 
+.regional-forms-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.regional-form-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(145deg, #f8f8f8 0%, #e8e8e8 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.regional-form-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.regional-form-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.regional-emoji {
+  font-size: 1.2rem;
+}
+
+.regional-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2A2A2A;
+  text-align: center;
+}
+
+.regional-form-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+}
+
+.regional-types {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .locations-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
