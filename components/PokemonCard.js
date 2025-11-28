@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { getMegaEvolutions } from '../lib/pokeapi';
 
 export default function PokemonCard({ pokemon, species, evolutions, locations, onPokemonClick }) {
   const [showShiny, setShowShiny] = useState(false);
@@ -32,6 +33,9 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, o
   };
   
   const description = getDescription();
+  
+  // Get mega evolutions if available
+  const megaEvolutions = getMegaEvolutions(species, pokemon.name);
   
   return (
     <div className="pokemon-card">
@@ -165,6 +169,34 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, o
                   />
                   <span className="evolution-name">{evo.name}</span>
                 </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Mega Evolution Section */}
+      {megaEvolutions && megaEvolutions.length > 0 && (
+        <div className="section">
+          <h2 className="section-title">💎 Mega Evolution</h2>
+          <div className="mega-evolution-grid">
+            {megaEvolutions.map((mega) => (
+              <div key={mega.id} className="mega-evolution-card">
+                <div className="mega-pokemon-container">
+                  <Image 
+                    src={mega.sprite} 
+                    alt={mega.displayName}
+                    className="mega-pokemon-image"
+                    width={120}
+                    height={120}
+                    unoptimized
+                  />
+                  <span className="mega-pokemon-name">{mega.displayName}</span>
+                </div>
+                <div className="mega-stone-container">
+                  <div className="mega-stone-icon">💎</div>
+                  <span className="mega-stone-name">{mega.megaStone}</span>
+                </div>
               </div>
             ))}
           </div>
