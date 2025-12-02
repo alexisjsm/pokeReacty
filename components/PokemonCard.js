@@ -37,6 +37,13 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, r
   // Get mega evolutions if available
   const megaEvolutions = getMegaEvolutions(species, pokemon.name);
   
+  // Check if type effectiveness data is available
+  const hasTypeEffectiveness = typeEffectiveness && (
+    typeEffectiveness.weaknesses?.length > 0 || 
+    typeEffectiveness.resistances?.length > 0 || 
+    typeEffectiveness.immunities?.length > 0
+  );
+  
   return (
     <div className="pokemon-card">
       {/* Header Section */}
@@ -140,7 +147,7 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, r
       </div>
       
       {/* Type Effectiveness Section */}
-      {typeEffectiveness && (typeEffectiveness.weaknesses?.length > 0 || typeEffectiveness.resistances?.length > 0 || typeEffectiveness.immunities?.length > 0) && (
+      {hasTypeEffectiveness && (
         <div className="section">
           <h2 className="section-title">⚔️ Type Effectiveness</h2>
           <div className="type-effectiveness-container">
