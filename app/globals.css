@@ -335,6 +335,79 @@ body, html {
 .stat-special-defense { background: linear-gradient(90deg, #A7DB8D 0%, #78C850 100%); }
 .stat-speed { background: linear-gradient(90deg, #FA92B2 0%, #F85888 100%); }
 
+/* Type Effectiveness Styles */
+.type-effectiveness-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.effectiveness-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.effectiveness-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+  padding-left: 0.5rem;
+  border-left: 3px solid;
+}
+
+.weakness-label {
+  color: #C03028;
+  border-color: #C03028;
+}
+
+.resistance-label {
+  color: #3D7A3D;
+  border-color: #3D7A3D;
+}
+
+.immunity-label {
+  color: #705898;
+  border-color: #705898;
+}
+
+.effectiveness-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.effectiveness-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #f8f8f8;
+  border-radius: 20px;
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+}
+
+.multiplier {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.1rem 0.4rem;
+  border-radius: 10px;
+}
+
+.weakness-multiplier {
+  color: #C03028;
+  background: rgba(192, 48, 40, 0.1);
+}
+
+.resistance-multiplier {
+  color: #3D7A3D;
+  background: rgba(61, 122, 61, 0.1);
+}
+
+.immunity-multiplier {
+  color: #705898;
+  background: rgba(112, 88, 152, 0.1);
+}
+
 .evolution-chain {
   display: flex;
   flex-wrap: wrap;

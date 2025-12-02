@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { getMegaEvolutions } from '../lib/pokeapi';
 
-export default function PokemonCard({ pokemon, species, evolutions, locations, regionalForms, onPokemonClick }) {
+export default function PokemonCard({ pokemon, species, evolutions, locations, regionalForms, typeEffectiveness, onPokemonClick }) {
   const [showShiny, setShowShiny] = useState(false);
   
   if (!pokemon) return null;
@@ -138,6 +138,59 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, r
           <div></div>
         </div>
       </div>
+      
+      {/* Type Effectiveness Section */}
+      {typeEffectiveness && (typeEffectiveness.weaknesses?.length > 0 || typeEffectiveness.resistances?.length > 0 || typeEffectiveness.immunities?.length > 0) && (
+        <div className="section">
+          <h2 className="section-title">⚔️ Type Effectiveness</h2>
+          <div className="type-effectiveness-container">
+            {/* Weaknesses */}
+            {typeEffectiveness.weaknesses?.length > 0 && (
+              <div className="effectiveness-group">
+                <h3 className="effectiveness-label weakness-label">Weak Against</h3>
+                <div className="effectiveness-types">
+                  {typeEffectiveness.weaknesses.map(({ type, multiplier }) => (
+                    <div key={type} className="effectiveness-item">
+                      <span className={`type-badge type-${type}`}>{type}</span>
+                      <span className="multiplier weakness-multiplier">×{multiplier}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Resistances */}
+            {typeEffectiveness.resistances?.length > 0 && (
+              <div className="effectiveness-group">
+                <h3 className="effectiveness-label resistance-label">Resistant To</h3>
+                <div className="effectiveness-types">
+                  {typeEffectiveness.resistances.map(({ type, multiplier }) => (
+                    <div key={type} className="effectiveness-item">
+                      <span className={`type-badge type-${type}`}>{type}</span>
+                      <span className="multiplier resistance-multiplier">×{multiplier}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            {/* Immunities */}
+            {typeEffectiveness.immunities?.length > 0 && (
+              <div className="effectiveness-group">
+                <h3 className="effectiveness-label immunity-label">Immune To</h3>
+                <div className="effectiveness-types">
+                  {typeEffectiveness.immunities.map(({ type }) => (
+                    <div key={type} className="effectiveness-item">
+                      <span className={`type-badge type-${type}`}>{type}</span>
+                      <span className="multiplier immunity-multiplier">×0</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
       
       {/* Evolution Chain Section */}
       {evolutions && evolutions.length > 1 && (

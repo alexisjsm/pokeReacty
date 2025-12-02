@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import SearchForm from '../components/SearchForm';
 import PokemonCard from '../components/PokemonCard';
-import { getPokemon, getPokemonSpecies, getEvolutionChain, getPokemonLocations, parseEvolutionChain, getRegionalForms, fetchRegionalFormTypes } from '../lib/pokeapi';
+import { getPokemon, getPokemonSpecies, getEvolutionChain, getPokemonLocations, parseEvolutionChain, getRegionalForms, fetchRegionalFormTypes, getTypeEffectiveness } from '../lib/pokeapi';
 
 export default function Home() {
   const [pokemon, setPokemon] = useState(null);
@@ -11,6 +11,7 @@ export default function Home() {
   const [evolutions, setEvolutions] = useState([]);
   const [locations, setLocations] = useState([]);
   const [regionalForms, setRegionalForms] = useState([]);
+  const [typeEffectiveness, setTypeEffectiveness] = useState({ weaknesses: [], resistances: [], immunities: [] });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [currentSearch, setCurrentSearch] = useState('');
@@ -33,11 +34,17 @@ export default function Home() {
         setEvolutions([]);
         setLocations([]);
         setRegionalForms([]);
+        setTypeEffectiveness({ weaknesses: [], resistances: [], immunities: [] });
         setLoading(false);
         return;
       }
       
       setPokemon(pokemonData);
+      
+      // Fetch type effectiveness (weaknesses/resistances)
+      const types = pokemonData.types.map(t => t.type.name);
+      const effectiveness = await getTypeEffectiveness(types);
+      setTypeEffectiveness(effectiveness);
       
       // Fetch species data for evolution chain
       const speciesData = await getPokemonSpecies(pokemonData.species.name);
@@ -107,6 +114,7 @@ export default function Home() {
           evolutions={evolutions}
           locations={locations}
           regionalForms={regionalForms}
+          typeEffectiveness={typeEffectiveness}
           onPokemonClick={handlePokemonClick}
         />
       )}
