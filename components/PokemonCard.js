@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { getMegaEvolutions } from '../lib/pokeapi';
+import TypeIcon from './TypeIcon';
 
 export default function PokemonCard({ pokemon, species, evolutions, locations, regionalForms, typeEffectiveness, onPokemonClick }) {
   const [showShiny, setShowShiny] = useState(false);
@@ -73,12 +74,10 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, r
           
           <div className="pokemon-types">
             {pokemon.types.map((typeInfo) => (
-              <span 
+              <TypeIcon 
                 key={typeInfo.type.name}
-                className={`type-badge type-${typeInfo.type.name}`}
-              >
-                {typeInfo.type.name}
-              </span>
+                type={typeInfo.type.name}
+              />
             ))}
           </div>
           
@@ -158,7 +157,7 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, r
                 <div className="effectiveness-types">
                   {typeEffectiveness.weaknesses.map(({ type, multiplier }) => (
                     <div key={type} className="effectiveness-item">
-                      <span className={`type-badge type-${type}`}>{type}</span>
+                      <TypeIcon type={type} />
                       <span className="multiplier weakness-multiplier">×{multiplier}</span>
                     </div>
                   ))}
@@ -173,7 +172,7 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, r
                 <div className="effectiveness-types">
                   {typeEffectiveness.resistances.map(({ type, multiplier }) => (
                     <div key={type} className="effectiveness-item">
-                      <span className={`type-badge type-${type}`}>{type}</span>
+                      <TypeIcon type={type} />
                       <span className="multiplier resistance-multiplier">×{multiplier}</span>
                     </div>
                   ))}
@@ -188,7 +187,7 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, r
                 <div className="effectiveness-types">
                   {typeEffectiveness.immunities.map(({ type }) => (
                     <div key={type} className="effectiveness-item">
-                      <span className={`type-badge type-${type}`}>{type}</span>
+                      <TypeIcon type={type} />
                       <span className="multiplier immunity-multiplier">×0</span>
                     </div>
                   ))}
@@ -284,12 +283,10 @@ export default function PokemonCard({ pokemon, species, evolutions, locations, r
                 />
                 <div className="regional-types">
                   {form.types && form.types.map((type) => (
-                    <span 
+                    <TypeIcon 
                       key={type}
-                      className={`type-badge type-${type}`}
-                    >
-                      {type}
-                    </span>
+                      type={type}
+                    />
                   ))}
                 </div>
               </div>

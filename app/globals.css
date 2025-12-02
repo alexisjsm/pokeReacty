@@ -226,6 +226,25 @@ body, html {
   text-transform: capitalize;
 }
 
+.type-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.type-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+}
+
+.type-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
 .type-normal { background: #A8A878; }
 .type-fire { background: #F08030; }
 .type-water { background: #6890F0; }
